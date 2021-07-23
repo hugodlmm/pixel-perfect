@@ -1,7 +1,7 @@
 // =============================================
 // Elements from popup.html
 let findCardBtn = document.querySelector('.js-find-card')
-const thumbnailVideoDropzone = document.querySelector('.py-label-video-thumbnail')
+const thumbnailVideoDropzone = document.querySelector('.pp-label-video-thumbnail')
 const thumbnailInput = document.querySelector('.js-thumbnail-input')
 const previewVideo = document.querySelector('.preview-video-thumbnail')
 
@@ -21,7 +21,6 @@ function initInputs() {
       }
     }
   })
-  // launchScript()
 }
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -54,7 +53,6 @@ async function launchScript() {
 
 findCardBtn.addEventListener('click', async () => {
   await launchScript()
-  //const activeScreen = document.querySelector('[role="main"]')
 })
 
 thumbnailInput.addEventListener('change', () => {
