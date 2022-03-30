@@ -24,7 +24,6 @@ Go to Chrome extension (chrome://extensions/) then load the extension
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
 
 ## Things to implement in the future
 
