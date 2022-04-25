@@ -1,11 +1,11 @@
 {
   "name": "Pixel Perfect",
-  "description": "Make your CSS looks exactly to your design with a image comparasion",
-  "version": "1.2",
+  "description": "Preview your design while making the integration in the same time.",
+  "version": "1.3",
   "manifest_version": 2,
-  "permissions": ["storage", "activeTab", "tabs"],
+  "permissions": ["storage", "activeTab"],
   "browser_action": {
-    "default_popup": "popup.html",
+    "default_popup": "popup-wrapper.html",
     "default_icon": {
       "16": "/images/logo16.png",
       "32": "/images/logo32.png",

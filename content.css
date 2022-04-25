@@ -1,70 +1,72 @@
-.pp-popup-overlay {
-    position: fixed;
-    z-index: 2147483645;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0;
+.py-popup-overlay {
+  position: fixed;
+  z-index: 2147483645;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
 }
 
-.pp-hide {
-  display: none;
+.py-popup-container {
+  position: fixed;
+  top: 0;
+  right: 30px;
+  max-width: 100%;
+  width: 400px;
+  height: 630px; /* height auto not working */
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 15%), 0 2px 2px rgb(0 0 0 / 15%),
+    0 4px 4px rgb(0 0 0 / 15%), 0 8px 8px rgb(0 0 0 / 15%);
 }
-
-.pp-popup-container {
-    position: fixed;
-    top: 0;
-    right: 105px;
-    width: 400px;
-    height: 380px; /* height auto not working */
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 1px 1px rgb(0 0 0 / 15%), 0 2px 2px rgb(0 0 0 / 15%), 0 4px 4px rgb(0 0 0 / 15%), 0 8px 8px rgb(0 0 0 / 15%);
-}
-
 
 .image-slider {
-	position:relative;
-	display: inline-block;
-  width:100%;
-  height:100vh
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100vh;
 }
-.image-slider > div:nth-child(1) > img {
-	user-select: none !important;
-	width: 100vw !important;
+.image-slider > .pp-comparator > img {
+  user-select: none !important;
+  width: 100vw !important;
 }
-.image-slider > div:nth-child(1) {
-	position: fixed;
-	top: 0; bottom: 0; left: 0;
-	width: 25px;
-	max-width: 100%;
-	overflow: hidden;
-	resize: horizontal;
+.image-slider > .pp-comparator {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 25px;
+  max-width: 100%;
+  overflow: hidden;
+  resize: horizontal;
   z-index: 999999;
 }
 
-.image-slider > div:nth-child(2) {
-  display: none;
+.image-slider > .border-top {
+  height: 30px;
+  width: 100vw !important;
+  resize: vertical !important;
 }
 
-.image-slider > div:nth-child(1):before {
-	content: '';
-	display: block;
-	width: 13px; 
-	height: 13px;
-	overflow: hidden;
+.image-slider > .pp-comparator:before {
+  content: "";
+  display: block;
+  width: 13px;
+  height: 13px;
+  overflow: hidden;
   z-index: 2147483645;
-	position: absolute;
-	resize: horizontal;
-	right: 3px; bottom: 3px;
-	background-clip: content-box;
-	background: linear-gradient(-45deg, black 50%, transparent 0);
-	-webkit-filter: drop-shadow(0 0 2px black);
-	filter: drop-shadow(0 0 2px black);
+  position: absolute;
+  resize: horizontal;
+  right: 3px;
+  bottom: 3px;
+  background-clip: content-box;
+  background: linear-gradient(-45deg, black 50%, transparent 0);
+  -webkit-filter: drop-shadow(0 0 2px black);
+  filter: drop-shadow(0 0 2px black);
 }

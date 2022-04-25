@@ -11,12 +11,21 @@
   --black: #2a2c40;
   --main: #6116ff;
 
-  --btnColor: #1f7a4d;
+  --btnColor: #6116ff;
+  --btnColorHover: #4e0fd8;
   --btnBorder: #24008c;
   --bg: #ffffff; /* Dark/Light Mode : */
   --btnBg: #f8f5ff; /* These custom properties are the colors that change */
   --formText: #000000; /* when we switch from one mode to another */
   --headerColor: #161827; /* we binded some JS to them to facilitate the switch */
+  --height: 30px;
+  --thumb-height: 13px;
+  --track-height: 3px;
+
+  --upper-color: #cfcfcf;
+  --lower-color: #0199ff;
+  --thumb-color: #0199ff;
+  --thumb-hover-color: #55c2ff;
 }
 
 body {
@@ -24,7 +33,7 @@ body {
 }
 
 /* Button */
-.pp-button {
+.py-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -49,21 +58,81 @@ body {
   width: 100%;
 }
 
-.pp-button > span {
+.py-button circle {
+  transition: transform 150ms ease;
+}
+
+.py-button > span {
   transition: transform 300ms ease;
   display: inline-block;
 }
 
-.pp-button:hover {
+.py-button:hover {
   box-shadow: 0px -4px 0px 0px var(--btnBorder) inset;
   -webkit-box-shadow: 0px -4px 0px 0px var(--btnBorder) inset;
   -moz-box-shadow: 0px -4px 0px 0px var(--btnBorder) inset;
 }
 
-.pp-container {
+.py-button:hover circle {
+  transform: translateX(5px);
+}
+
+.py-button:hover > span {
+  transform: translateX(-5px);
+}
+
+.py-dice {
+  font-size: 32px;
+  position: absolute;
+  right: 0;
+  transform: translateX(100%);
+  padding: 0 10px;
+  transition: transform 600ms ease-out;
+}
+
+.py-dice:hover div {
+  animation: diceShaking 150ms infinite alternate linear;
+}
+
+.py-button:hover .py-dice {
+  transform: translate(50%);
+}
+
+.py-dice:hover {
+  transform: translateX(0%) !important;
+}
+
+.py-button-icon {
+  margin-right: 12px;
+}
+
+.py-secondary-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 50%;
+  transition: all 150ms ease;
+  cursor: pointer;
+}
+
+.py-secondary-button:hover {
+  background-color: var(--btnBg);
+}
+
+.py-secondary-button svg * {
+  transition: all 150ms;
+}
+.py-secondary-button:hover svg * {
+  fill: var(--main);
+}
+
+.py-container {
   position: relative;
   width: 400px;
-  height: 380px; /* had to fix the height because object height auto not working */
+  height: 630px; /* had to fix the height because object height auto not working */
   border: none;
   background-color: var(--bg);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -71,7 +140,19 @@ body {
   transition: background-color 250ms;
 }
 
-.pp-header {
+.reset-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.darkmode-button {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
+
+.py-header {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,13 +160,32 @@ body {
   margin-bottom: 24px;
 }
 
-.pp-footer {
+.py-header-eyes {
+  width: 32px;
+  margin-right: 8px;
+}
+
+.py-header-eyes circle {
+  transition: all 150ms ease;
+}
+
+.py-header-eyes:hover circle {
+  transform: translateX(5px);
+}
+
+.py-header-title {
+  font-size: 24px;
+  color: var(--headerColor);
+  font-weight: 900;
+}
+
+.py-footer {
   text-align: center;
   font-size: 11px;
   color: var(--grey);
 }
 
-.pp-footer a {
+.py-footer a {
   color: var(--headerColor);
 }
 
@@ -94,14 +194,20 @@ input {
   -moz-appearance: none;
 }
 
-.pp-form-group {
+.py-form-group {
   display: block;
   position: relative;
   width: 100%;
   margin-bottom: 24px;
 }
 
-.pp-form-label {
+.py-form-group.c-thumb {
+  flex-basis: 56px;
+  margin-right: 24px;
+  margin-bottom: 16px;
+}
+
+.py-form-label {
   position: absolute;
   top: calc(50% - 7.5px);
   transition: all 0.15s ease-in;
@@ -110,7 +216,32 @@ input {
   color: var(--grey);
 }
 
-.pp-form-file {
+.py-form-field {
+  background: transparent;
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid var(--grey-light);
+  font-size: 15px;
+  height: 40px;
+  outline: 0;
+  color: var(--formText);
+  transition: color 250ms;
+}
+
+.py-form-field:focus {
+  border-color: var(--main);
+}
+
+.py-form-field:focus + .py-form-label,
+.py-form-field:valid + .py-form-label {
+  top: -6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--main);
+}
+
+.py-form-file {
   width: 0.1px;
   height: 0.1px;
   opacity: 0;
@@ -119,13 +250,84 @@ input {
   z-index: -1;
 }
 
-.pp-error {
+.py-error {
   display: block;
   margin-top: 12px;
 }
 
+/* Channel file */
+.file-channel-thumbnail + .py-form-filelabel {
+  display: block;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 250ms;
+  background-color: var(--btnBg);
+}
+
+.file-channel-thumbnail:focus + .py-form-filelabel,
+.file-channel-thumbnail + .py-form-filelabel:hover {
+  background-color: var(--grey-light);
+}
+
+.preview-channel-thumbnail {
+  max-width: 56px;
+}
+
+.channel-fileinput-img {
+  position: relative;
+  z-index: 10;
+  display: none;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.file-channel-thumbnail:valid + .py-form-filelabel .channel-fileinput-img,
+.file-channel-thumbnail.loaded + .py-form-filelabel .channel-fileinput-img {
+  display: block;
+}
+
+.channel-fileinput-user {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  transition: all 250ms;
+  transform-origin: 50% 150%;
+  opacity: 1;
+  transform: translateX(-50%);
+}
+
+.file-channel-thumbnail + .py-form-filelabel:hover .channel-fileinput-user {
+  transform: rotate(-90deg);
+  opacity: 0;
+}
+
+.channel-fileinput-add {
+  position: absolute;
+  width: 18px;
+  left: 19px;
+  top: 19px;
+  transition: all 250ms;
+  transform-origin: 50% 200%;
+  transform: rotate(90deg);
+}
+
+.file-channel-thumbnail + .py-form-filelabel:hover .channel-fileinput-add {
+  transform: rotate(0deg);
+}
+
+.file-channel-thumbnail:valid + .py-form-filelabel .channel-fileinput-user,
+.file-channel-thumbnail:valid + .py-form-filelabel .channel-fileinput-add,
+.file-channel-thumbnail.loaded + .py-form-filelabel .channel-fileinput-user,
+.file-channel-thumbnail.loaded + .py-form-filelabel .channel-fileinput-add {
+  display: none;
+}
+
 /* Video thumbnail file */
-.file-video-thumbnail + .pp-form-filelabel {
+.file-video-thumbnail + .py-form-filelabel {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,8 +342,8 @@ input {
   transition: background-color 350ms;
 }
 
-.file-video-thumbnail:focus + .pp-form-filelabel,
-.file-video-thumbnail + .pp-form-filelabel:hover {
+.file-video-thumbnail:focus + .py-form-filelabel,
+.file-video-thumbnail + .py-form-filelabel:hover {
 }
 
 .video-fileinput-img {
@@ -154,8 +356,8 @@ input {
   border: 6px solid var(--btnBg);
 }
 
-.file-video-thumbnail:valid + .pp-form-filelabel .video-fileinput-img,
-.file-video-thumbnail.loaded + .pp-form-filelabel .video-fileinput-img {
+.file-video-thumbnail:valid + .py-form-filelabel .video-fileinput-img,
+.file-video-thumbnail.loaded + .py-form-filelabel .video-fileinput-img {
   display: block;
 }
 
@@ -173,7 +375,7 @@ input {
   z-index: 5;
 }
 
-.file-video-thumbnail + .pp-form-filelabel:hover .file-video-dragarea {
+.file-video-thumbnail + .py-form-filelabel:hover .file-video-dragarea {
   border-color: var(--main);
 }
 
@@ -186,7 +388,7 @@ input {
   opacity: 1;
 }
 
-.file-video-thumbnail + .pp-form-filelabel:hover .file-video-text {
+.file-video-thumbnail + .py-form-filelabel:hover .file-video-text {
   opacity: 0;
 }
 
@@ -196,7 +398,7 @@ input {
   transition: ease 250ms;
 }
 
-.file-video-thumbnail + .pp-form-filelabel:hover .file-video-illu {
+.file-video-thumbnail + .py-form-filelabel:hover .file-video-illu {
   transform: scale(1.3) rotate(-5deg);
   transform-origin: 50% 50%;
 }
@@ -211,11 +413,62 @@ input {
   opacity: 0;
 }
 
-.file-video-thumbnail + .pp-form-filelabel:hover .file-video-catpaw {
+.file-video-thumbnail + .py-form-filelabel:hover .file-video-catpaw {
   right: 0px;
   bottom: -45%;
   opacity: 1;
 }
+
+/* Random position */
+.random-switch {
+  display: flex;
+  margin-bottom: 18px;
+}
+.random-switch.active .py-form-label {
+  color: var(--formText);
+}
+
+.switch {
+  display: inline-block;
+  margin-left: auto;
+  width: 40px;
+  height: 24px;
+}
+
+.slider {
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-color: #7d7a90;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: var(--btnColor);
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--btnColor);
+}
+input:checked + .slider:before {
+  transform: translateX(16px);
+}
+
+/* //////// */
 
 .row {
   display: flex;
@@ -223,6 +476,207 @@ input {
   margin-bottom: 20px;
 }
 
-.row .pp-form-group {
+.row .py-form-group {
   margin-bottom: 0;
+}
+
+@keyframes diceShaking {
+  0% {
+    transform: rotate(8deg);
+  }
+
+  100% {
+    transform: rotate(-8deg);
+  }
+}
+
+.gg-border-bottom {
+  transform: scale(var(--ggs, 1));
+}
+
+.gg-border-bottom,
+.gg-border-bottom::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-bottom: 3px solid;
+}
+
+.gg-border-bottom::before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  border: 3px solid;
+  border-bottom: 0;
+  bottom: 2px;
+  left: 0;
+  opacity: 0.3;
+}
+
+.gg-border-left {
+  transform: scale(var(--ggs, 1));
+}
+
+.gg-border-left,
+.gg-border-left::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-left: 3px solid;
+}
+
+.gg-border-left::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  border: 3px solid;
+  border-left: 0;
+  bottom: 0;
+  left: 2px;
+  opacity: 0.3;
+}
+
+.gg-border-right {
+  transform: scale(var(--ggs, 1));
+}
+
+.gg-border-right,
+.gg-border-right::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-right: 3px solid;
+}
+
+.gg-border-right::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  border: 3px solid;
+  border-right: 0;
+  bottom: 0;
+  right: 2px;
+  opacity: 0.3;
+}
+
+.gg-border-top {
+  transform: scale(var(--ggs, 1));
+}
+
+.gg-border-top,
+.gg-border-top::before {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-top: 3px solid;
+}
+
+.gg-border-top::before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  border: 3px solid;
+  border-top: 0;
+  top: 2px;
+  left: 0;
+  opacity: 0.3;
+}
+
+.border-button {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.border-button button {
+  padding: 1rem;
+  border: none;
+  background-color: var(--btnColor);
+  border-radius: 8px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.border-button button:hover {
+  background-color: var(--btnColorHover);
+}
+
+.border-button .active {
+  background-color: var(--btnColorHover);
+}
+
+.gg-border,
+.gg-border::before {
+  border-color: var(--btnBg);
+}
+
+.row.text {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+#opacity {
+  margin: auto;
+  outline: none;
+  padding: 0;
+  width: 50%;
+  height: 6px;
+  background-color: #dea4ff;
+  background-size: 50% 100%;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+#opacity::-webkit-slider-runnable-track {
+  box-shadow: none;
+  border: none;
+  background: transparent;
+  -webkit-appearance: none;
+}
+
+#opacity::-moz-range-track {
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+#opacity::-moz-focus-outer {
+  border: 0;
+}
+
+#opacity::-webkit-slider-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  background: #4e0fd8;
+  border-radius: 100%;
+  box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
+  -webkit-appearance: none;
+}
+
+#opacity::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  background: #4e0fd8;
+  border-radius: 100%;
+  box-shadow: 0 0 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.js-find-card {
+    margin-top: 2rem;
+}
+
+.py-footer p {
+    margin-top: 0.625rem;
 }
