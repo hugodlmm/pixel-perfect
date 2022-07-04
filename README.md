@@ -1,4 +1,4 @@
-# youtube-thumbnail-tester-chrome-extension
+# pixel-perfect
 
 ## Installation
 - Clone the repo
@@ -38,7 +38,11 @@ The main config file is ``.eslintrc.json``
 
 
 ## Credits
-Made by benjamincode live on Twitch :
+Because it's a fork of : [Youtube PrevYou](https://github.com/bdebon/youtube-thumbnail-tester-chrome-extension) by benjamincode live on Twitch :
 - [Youtube : Benjamin Code](https://www.youtube.com/channel/UCLOAPb7ATQUs_nDs9ViLcMw)
 - [Twitch : benjamincode](https://www.twitch.tv/benjamincode)
 - [Twitter : @benjamincodeYT](https://twitter.com/benjamincodeYT)
+
+Mine :
+- [Porfolio](https://hugo-web.fr)
+- [Linkdin](https://www.linkedin.com/in/hugo-de-la-mata/)
